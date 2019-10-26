@@ -1,9 +1,9 @@
-// SignUp form
+// Sign up page
 
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { Link as RouterLink } from 'react-router-dom';
-import signUpAction from '../../store/actions/signUpAction';
+import signUpAction from '../../redux/actions/signUpAction';
 
 // Material UI
 import Container from '@material-ui/core/Container';
@@ -30,21 +30,21 @@ const SignUp = () => {
 		email: '',
 		password: ''
 	});
-  
+
 	const handleChange = (id, value) => {
-    setUser(state => ({ ...state, [id]: value }));
+		setUser(state => ({ ...state, [id]: value }));
 	};
-  
+
 	const handleSubmit = e => {
-    e.preventDefault();
-    console.log("TCL: SignUp -> user", user)
+		e.preventDefault();
+		console.log('TCL: SignUp -> user', user);
 
 		dispatch(signUpAction(user));
 		setUser({
-      firstName: '',
-      lastName: '',
-      email: '',
-      password: ''
+			firstName: '',
+			lastName: '',
+			email: '',
+			password: ''
 		});
 	};
 

@@ -1,9 +1,11 @@
+// Home page
+
 import React from 'react';
 
 // Material UI
-import Container from '@material-ui/core/Container';
+// import Container from '@material-ui/core/Container';
 
-export default function Dashboard() {
+export default function Home() {
 	return (
 		<>
 			<h2>Home</h2>

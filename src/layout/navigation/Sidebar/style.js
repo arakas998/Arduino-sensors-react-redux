@@ -9,7 +9,7 @@ export default makeStyles(theme => ({
 		width: drawerWidth,
 		flexShrink: 0,
 		whiteSpace: 'nowrap',
-    position: 'absolute',
+		position: 'absolute',
 		[theme.breakpoints.up('sm')]: {
 			position: 'initial'
 		}
@@ -19,10 +19,10 @@ export default makeStyles(theme => ({
 		transition: theme.transitions.create('width', {
 			easing: theme.transitions.easing.sharp,
 			duration: theme.transitions.duration.enteringScreen
-    }),
-    // [theme.breakpoints.up('sm')]: {
-      zIndex: 1202
-    // }
+		}),
+		// [theme.breakpoints.up('sm')]: {
+		zIndex: 1202
+		// }
 	},
 	drawerClose: {
 		transition: theme.transitions.create('width', {

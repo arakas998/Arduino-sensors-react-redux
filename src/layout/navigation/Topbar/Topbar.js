@@ -4,7 +4,7 @@ import clsx from 'clsx';
 import React from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { signOutAction } from '../../../../store/actions/authActions';
+import { signOutAction } from '../../../redux/actions/authActions';
 
 // Material UI
 import Fab from '@material-ui/core/Fab';
@@ -24,7 +24,7 @@ import { faBars } from '@fortawesome/free-solid-svg-icons';
 // Custom styles
 import useStyles from './style.js';
 
-const ApplicationBar = ({ open, handleDrawerOpen }) => {
+const Topbar = ({ open, handleDrawerOpen }) => {
 	const dispatch = useDispatch();
 	const classes = useStyles();
 	const singIn = useSelector(state => state.auth.singIn);
@@ -103,4 +103,4 @@ const ApplicationBar = ({ open, handleDrawerOpen }) => {
 	);
 };
 
-export default ApplicationBar;
+export default Topbar;

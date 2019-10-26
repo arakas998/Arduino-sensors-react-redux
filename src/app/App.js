@@ -9,8 +9,8 @@ import Container from '@material-ui/core/Container';
 import Toolbar from '@material-ui/core/Toolbar';
 
 // Custom components
-import Routes from '../Routes/Routes';
-import Navigation from '../Layout/Navigation/Navigation';
+import Routes from '../routes/Routes';
+import Navigation from '../layout/navigation/Navigation';
 
 // Custom styles
 import useStyles from './style.js';

@@ -1,16 +1,16 @@
 // Routes
 
-import React from './node_modules/react';
-import { Route } from './node_modules/react-router-dom';
-import { CSSTransition } from './node_modules/react-transition-group';
+import React from 'react';
+import { Route } from 'react-router-dom';
+import { CSSTransition } from 'react-transition-group';
 
-import Copyright from '../layout/Copyright/Copyright';
-import Dashboard from '../pages/Dashboard/Dashboard';
-import Temperature from '../components/Sensors/Temperature/Temperature';
-import Humidity from '../components/Sensors/Humidity/Humidity';
-import Signup from '../Auth/SignUp';
-import Signin from '../Auth/SignIn';
-import Signout from '../Auth/SignOut';
+import Copyright from '../components/Copyright/Copyright';
+import Dashboard from '../pages/home/Home';
+import Temperature from '../components/Temperature/Temperature';
+import Humidity from '../components/Humidity/Humidity';
+import Signup from '../pages/auth/SignUp';
+import Signin from '../pages/auth/SignIn';
+import Signout from '../pages/auth/SignOut';
 
 // Custom styles
 import useStyles from './style.js';

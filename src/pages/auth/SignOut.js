@@ -1,3 +1,5 @@
+// Sign out page
+
 import React from 'react';
 
 import Container from '@material-ui/core/Container';

@@ -2,8 +2,8 @@
 import React, { useState } from 'react';
 
 // Custom components
-import AppsBar from './TopBar/TopBar';
-import MiniDrawer from './SideBar/SideBar';
+import AppsBar from './Topbar/Topbar';
+import Sidebar from './Sidebar/Sidebar';
 
 const Navigation = () => {
 	const [open, setOpen] = useState(false);
@@ -19,7 +19,7 @@ const Navigation = () => {
 	return (
 		<header>
 			<AppsBar open={open} handleDrawerOpen={handleDrawerOpen} />
-			<MiniDrawer open={open} handleDrawerClose={handleDrawerClose} />
+			<Sidebar open={open} handleDrawerClose={handleDrawerClose} />
 		</header>
 	);
 };

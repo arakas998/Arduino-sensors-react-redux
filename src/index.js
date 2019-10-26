@@ -1,4 +1,4 @@
-// Main entry file
+// Entry file
 
 import React from 'react';
 import ReactDOM from 'react-dom';
@@ -6,8 +6,8 @@ import { Provider } from 'react-redux';
 import CssBaseline from '@material-ui/core/CssBaseline';
 
 // Redux store
-import App from './components/App/App';
-import store from './store/store';
+import App from './app/App';
+import store from './redux/store';
 
 // Global theme
 import { ThemeProvider } from '@material-ui/core/styles';

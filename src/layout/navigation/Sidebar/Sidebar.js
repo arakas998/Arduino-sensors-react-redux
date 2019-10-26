@@ -31,7 +31,8 @@ const routes = [
 	{ path: '/control', name: 'Control', icon: faSlidersH }
 ];
 
-export default function MiniDrawer({ open, handleDrawerClose }) {
+// Sidebar
+export default function Sidebar({ open, handleDrawerClose }) {
 	const classes = useStyles();
 
 	return (

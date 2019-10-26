@@ -1,9 +1,9 @@
-// SignIn form
+// Sign in page
 
 import React, { useState } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { signInAction } from '../../store/actions/authActions';
+import { signInAction } from '../../redux/actions/authActions';
 
 // Material UI
 import Container from '@material-ui/core/Container';
