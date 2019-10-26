@@ -1,0 +1,18 @@
+{
+  "files": {
+    "main.js": "/arduino-sensors/static/js/main.fe127ad4.chunk.js",
+    "main.js.map": "/arduino-sensors/static/js/main.fe127ad4.chunk.js.map",
+    "runtime-main.js": "/arduino-sensors/static/js/runtime-main.d65ad5b3.js",
+    "runtime-main.js.map": "/arduino-sensors/static/js/runtime-main.d65ad5b3.js.map",
+    "static/js/2.7b623567.chunk.js": "/arduino-sensors/static/js/2.7b623567.chunk.js",
+    "static/js/2.7b623567.chunk.js.map": "/arduino-sensors/static/js/2.7b623567.chunk.js.map",
+    "index.html": "/arduino-sensors/index.html",
+    "precache-manifest.eaba9cf42e37187fd9c850068b946b67.js": "/arduino-sensors/precache-manifest.eaba9cf42e37187fd9c850068b946b67.js",
+    "service-worker.js": "/arduino-sensors/service-worker.js"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.d65ad5b3.js",
+    "static/js/2.7b623567.chunk.js",
+    "static/js/main.fe127ad4.chunk.js"
+  ]
+}
