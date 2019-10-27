@@ -1,27 +1,30 @@
-// Routes
+// Routes with transition effect
 
 import React from 'react';
 import { Route } from 'react-router-dom';
 import { CSSTransition } from 'react-transition-group';
 
+// Components
 import Copyright from '../components/Copyright/Copyright';
-import Dashboard from '../pages/home/Home';
-import Temperature from '../components/Temperature/Temperature';
-import Humidity from '../components/Humidity/Humidity';
-import Signup from '../pages/auth/SignUp';
-import Signin from '../pages/auth/SignIn';
-import Signout from '../pages/auth/SignOut';
 
-// Custom styles
+// Pages
+import Dashboard from '../pages/home/Home';
+import Signup from '../pages/auth/Signup';
+import Login from '../pages/auth/Login';
+import Logout from '../pages/auth/Logout';
+import Humidity from '../components/Humidity/Humidity';
+import Temperature from '../components/Temperature/Temperature';
+
+// Styles
 import useStyles from './style.js';
 
 const routes = [
 	{ path: '/', name: 'Dashboard', Component: Dashboard },
-	{ path: '/temperature', name: 'Temperature', Component: Temperature },
-	{ path: '/humidity', name: 'Humidity', Component: Humidity },
-	{ path: '/signin', name: 'Login', Component: Signin },
+	{ path: '/login', name: 'Login', Component: Login },
+	{ path: '/logout', name: 'Logout', Component: Logout },
 	{ path: '/signup', name: 'Signup', Component: Signup },
-	{ path: '/signout', name: 'Logout', Component: Signout }
+	{ path: '/humidity', name: 'Humidity', Component: Humidity },
+	{ path: '/temperature', name: 'Temperature', Component: Temperature }
 ];
 
 const Routes = () => {

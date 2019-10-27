@@ -9,16 +9,15 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import App from './app/App';
 import store from './redux/store';
 
-// Global theme
-import { ThemeProvider } from '@material-ui/core/styles';
-import theme from './theme/theme';
+// Custom theme
+import Theme from './theme/Theme';
 
 ReactDOM.render(
 	<Provider store={store}>
-		<ThemeProvider theme={theme}>
+		<Theme>
 			<CssBaseline />
 			<App />
-		</ThemeProvider>
+		</Theme>
 	</Provider>,
 	document.getElementById('root')
 );

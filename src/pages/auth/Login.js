@@ -1,20 +1,21 @@
-// Sign in page
+// Login page
 
 import React, { useState } from 'react';
-import { Link as RouterLink } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import { signInAction } from '../../redux/actions/authActions';
+import { Link as RouterLink, useHistory } from 'react-router-dom';
+// import { useDispatch } from 'react-redux';
+// import { signInAction } from '../../redux/actions/authActions';
+import { postData } from '../../lib';
+import ButtonProgress from '../../components/ButtonProgress';
 
 // Material UI
-import Container from '@material-ui/core/Container';
-import Avatar from '@material-ui/core/Avatar';
-import Typography from '@material-ui/core/Typography';
-import TextField from '@material-ui/core/TextField';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import Link from '@material-ui/core/Link';
+import Avatar from '@material-ui/core/Avatar';
 import Checkbox from '@material-ui/core/Checkbox';
+import TextField from '@material-ui/core/TextField';
+import Container from '@material-ui/core/Container';
+import Typography from '@material-ui/core/Typography';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
 
 // Font awesom
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -23,23 +24,51 @@ import { faUserLock } from '@fortawesome/free-solid-svg-icons';
 // Custom styles
 import useStyles from './style.js';
 
-const SignIn = () => {
+const Login = () => {
 	const classes = useStyles();
-	const dispatch = useDispatch();
+	const history = useHistory();
+	// const dispatch = useDispatch();
 	const [state, setState] = useState({
 		email: '',
 		password: '',
 		remember: false
 	});
+	const [error, setError] = useState({});
+	const [loading, setLoading] = useState(false);
 
 	const handleSubmit = e => {
 		e.preventDefault();
-		setState({
-			email: '',
-			password: '',
-			remember: false
+
+		setLoading(true);
+		setError({});
+
+		// Get login
+		const loginData = {
+			email: state.email,
+			password: state.password
+		};
+
+		// Login to firebase
+		postData('/login', null, loginData, (err, data) => {
+			// If error set erros messages
+			if (err) {
+				console.log('TCL: postData -> err', err);
+				setError(err);
+				setLoading(false);
+				return;
+			}
+			// If success save token in browser local storage
+			localStorage.setItem('token', 'Bearer ' + data.token);
+			setLoading(false);
+			setState({
+				email: '',
+				password: '',
+				remember: false
+			});
+			history.push('/');
 		});
-		dispatch(signInAction(state));
+
+		// dispatch(signInAction(state));
 	};
 
 	const handleChange = (id, value) => {
@@ -52,9 +81,11 @@ const SignIn = () => {
 				<Avatar className={classes.avatar}>
 					<FontAwesomeIcon icon={faUserLock} />
 				</Avatar>
+
 				<Typography component='h1' variant='h5'>
 					Sign in
 				</Typography>
+
 				<form className={classes.form} noValidate onSubmit={handleSubmit}>
 					<TextField
 						variant='outlined'
@@ -67,7 +98,10 @@ const SignIn = () => {
 						autoComplete='email'
 						autoFocus
 						onChange={e => handleChange(e.target.id, e.target.value)}
+						error={error.email ? true : false}
+						helperText={error.email}
 					/>
+
 					<TextField
 						variant='outlined'
 						margin='normal'
@@ -80,7 +114,10 @@ const SignIn = () => {
 						autoComplete='current-password'
 						value={state.password}
 						onChange={e => handleChange(e.target.id, e.target.value)}
+						error={error.password ? true : false}
+						helperText={error.password}
 					/>
+
 					<FormControlLabel
 						control={
 							<Checkbox
@@ -94,15 +131,15 @@ const SignIn = () => {
 						}
 						label='Remember me'
 					/>
-					<Button
-						type='submit'
-						fullWidth
-						variant='contained'
-						color='primary'
-						className={classes.submit}
-					>
-						Sign In
-					</Button>
+
+					{/* error message */}
+					<Typography variant='h6' align='center' color='secondary'>
+						{error.error}
+					</Typography>
+
+					{/* Submit button with progress */}
+					<ButtonProgress loading={loading}>Log In</ButtonProgress>
+
 					<Grid container>
 						<Grid item xs>
 							<Link href='#' variant='body2'>
@@ -121,4 +158,4 @@ const SignIn = () => {
 	);
 };
 
-export default SignIn;
+export default Login;

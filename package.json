@@ -42,5 +42,7 @@
 			"last 1 firefox version",
 			"last 1 safari version"
 		]
-	}
+	},
+	"proxy": "http://localhost:5000/arduino-sensors-754e5/europe-west1/api",
+	"proxy1": "https://europe-west1-arduino-sensors-754e5.cloudfunctions.net/api"
 }

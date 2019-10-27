@@ -4,10 +4,10 @@ import React from 'react';
 
 import Container from '@material-ui/core/Container';
 
-const SignOut = () => {
+const Logout = () => {
 	return (
 		<Container>
-			<h2>SignOut</h2>
+			<h2>Logout</h2>
 			<p>
 				Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut atque nemo, facilis in
 				praesentium sit cum laboriosam iusto? Asperiores optio consectetur esse ea exercitationem
@@ -20,4 +20,4 @@ const SignOut = () => {
 	);
 };
 
-export default SignOut;
+export default Logout;

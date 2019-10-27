@@ -11,7 +11,7 @@ export default makeStyles(theme => ({
 	marginLeft: {
 		marginLeft: theme.spacing(7) + 1,
 		[theme.breakpoints.up('sm')]: {
-			marginLeft: 0
+			marginLeft: 'auto'
 		}
 	},
 	pageContainer: {

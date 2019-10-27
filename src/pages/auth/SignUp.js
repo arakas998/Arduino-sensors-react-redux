@@ -21,7 +21,7 @@ import { faUserLock } from '@fortawesome/free-solid-svg-icons';
 // Custom styles
 import useStyles from './style.js';
 
-const SignUp = () => {
+const Signup = () => {
 	const classes = useStyles();
 	const dispatch = useDispatch();
 	const [user, setUser] = useState({
@@ -136,4 +136,4 @@ const SignUp = () => {
 	);
 };
 
-export default SignUp;
+export default Signup;

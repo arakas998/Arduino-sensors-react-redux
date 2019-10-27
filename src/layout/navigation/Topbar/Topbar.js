@@ -70,7 +70,7 @@ const Topbar = ({ open, handleDrawerOpen }) => {
 						{/* Links */}
 						<Grid item>
 							{(!singIn && (
-								<Button component={RouterLink} to={'/signin'}>
+								<Button component={RouterLink} to={'/login'}>
 									Sign In
 								</Button>
 							)) || (

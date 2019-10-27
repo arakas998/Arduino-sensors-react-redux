@@ -1,8 +1,7 @@
-// Application
+// Main application
 
 import React from 'react';
 import { BrowserRouter, Switch } from 'react-router-dom';
-import clsx from 'clsx';
 
 // Material-UI
 import Container from '@material-ui/core/Container';
@@ -21,13 +20,11 @@ function App() {
 		<div className={classes.root}>
 			<BrowserRouter>
 				<Navigation />
-				<Container component='main'>
+				<Container component='main' className={`${classes.pageContainer} ${classes.marginLeft}`}>
 					<Toolbar />
-					<div className={clsx(classes.pageContainer, classes.marginLeft)}>
-						<Switch>
-							<Routes />
-						</Switch>
-					</div>
+					<Switch>
+						<Routes />
+					</Switch>
 				</Container>
 			</BrowserRouter>
 		</div>

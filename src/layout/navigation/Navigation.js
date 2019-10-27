@@ -1,4 +1,5 @@
-// Navigation
+// Navigation with topbar and sidebar
+
 import React, { useState } from 'react';
 
 // Custom components
