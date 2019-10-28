@@ -15,7 +15,7 @@ const postData = (url = '', token = '', data = {}, cb) => {
 		body: JSON.stringify(data)
 	})
 		.then(res => {
-			console.log('TCL: postData -> res', res);
+			// console.log('TCL: postData -> res', res);
 			res
 				.json()
 				.then(data => (res.ok ? cb(null, data) : cb(data, null)))

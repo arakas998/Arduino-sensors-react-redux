@@ -1,23 +1,22 @@
 // Login page
 
 import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link as RouterLink, useHistory } from 'react-router-dom';
-// import { useDispatch } from 'react-redux';
-// import { signInAction } from '../../redux/actions/authActions';
-import { postData } from '../../lib';
+import { loginAction } from '../../redux/actions/userActions';
 import ButtonProgress from '../../components/ButtonProgress';
 
 // Material UI
 import Grid from '@material-ui/core/Grid';
 import Link from '@material-ui/core/Link';
 import Avatar from '@material-ui/core/Avatar';
-import Checkbox from '@material-ui/core/Checkbox';
+// import Checkbox from '@material-ui/core/Checkbox';
 import TextField from '@material-ui/core/TextField';
 import Container from '@material-ui/core/Container';
 import Typography from '@material-ui/core/Typography';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
+// import FormControlLabel from '@material-ui/core/FormControlLabel';
 
-// Font awesom
+// Awesome icons
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUserLock } from '@fortawesome/free-solid-svg-icons';
 
@@ -27,52 +26,24 @@ import useStyles from './style.js';
 const Login = () => {
 	const classes = useStyles();
 	const history = useHistory();
-	// const dispatch = useDispatch();
+	const dispatch = useDispatch();
+	const loading = useSelector(state => state.ui.loading);
+	const errors = useSelector(state => state.ui.errors);
 	const [state, setState] = useState({
 		email: '',
-		password: '',
-		remember: false
+		password: ''
+		// remember: false
 	});
-	const [error, setError] = useState({});
-	const [loading, setLoading] = useState(false);
+
+	const handleChange = (id, value) => {
+		setState(state => ({ ...state, [id]: value }));
+	};
 
 	const handleSubmit = e => {
 		e.preventDefault();
 
-		setLoading(true);
-		setError({});
-
-		// Get login
-		const loginData = {
-			email: state.email,
-			password: state.password
-		};
-
-		// Login to firebase
-		postData('/login', null, loginData, (err, data) => {
-			// If error set erros messages
-			if (err) {
-				console.log('TCL: postData -> err', err);
-				setError(err);
-				setLoading(false);
-				return;
-			}
-			// If success save token in browser local storage
-			localStorage.setItem('token', 'Bearer ' + data.token);
-			setLoading(false);
-			setState({
-				email: '',
-				password: '',
-				remember: false
-			});
-			history.push('/');
-		});
-
-		// dispatch(signInAction(state));
-	};
-
-	const handleChange = (id, value) => {
-		setState(state => ({ ...state, [id]: value }));
+		// Dispatch login action
+		dispatch(loginAction(state, history));
 	};
 
 	return (
@@ -87,6 +58,7 @@ const Login = () => {
 				</Typography>
 
 				<form className={classes.form} noValidate onSubmit={handleSubmit}>
+					{/* email */}
 					<TextField
 						variant='outlined'
 						margin='normal'
@@ -98,8 +70,8 @@ const Login = () => {
 						autoComplete='email'
 						autoFocus
 						onChange={e => handleChange(e.target.id, e.target.value)}
-						error={error.email ? true : false}
-						helperText={error.email}
+						error={errors.email ? true : false}
+						helperText={errors.email}
 					/>
 
 					<TextField
@@ -114,11 +86,11 @@ const Login = () => {
 						autoComplete='current-password'
 						value={state.password}
 						onChange={e => handleChange(e.target.id, e.target.value)}
-						error={error.password ? true : false}
-						helperText={error.password}
+						error={errors.password ? true : false}
+						helperText={errors.password}
 					/>
 
-					<FormControlLabel
+					{/* <FormControlLabel
 						control={
 							<Checkbox
 								id='remember'
@@ -130,25 +102,25 @@ const Login = () => {
 							/>
 						}
 						label='Remember me'
-					/>
+					/> */}
 
 					{/* error message */}
 					<Typography variant='h6' align='center' color='secondary'>
-						{error.error}
+						{errors.error}
 					</Typography>
 
 					{/* Submit button with progress */}
 					<ButtonProgress loading={loading}>Log In</ButtonProgress>
 
 					<Grid container>
-						<Grid item xs>
+						{/* <Grid item xs>
 							<Link href='#' variant='body2'>
 								Forgot password?
 							</Link>
-						</Grid>
-						<Grid item>
+						</Grid> */}
+						<Grid item style={{ marginLeft: 'auto' }}>
 							<Link component={RouterLink} to='/signup' variant='body2'>
-								{"Don't have an account? Sign Up"}
+								Don't have an account? Sign Up
 							</Link>
 						</Grid>
 					</Grid>

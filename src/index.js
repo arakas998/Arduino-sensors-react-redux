@@ -1,15 +1,19 @@
-// Entry file
+// Application entry file
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Provider } from 'react-redux';
-import CssBaseline from '@material-ui/core/CssBaseline';
 
-// Redux store
-import App from './app/App';
+// Redux
+import { Provider } from 'react-redux';
 import store from './redux/store';
 
-// Custom theme
+// Components
+import App from './app/App';
+
+// Material UI
+import CssBaseline from '@material-ui/core/CssBaseline';
+
+// Custom
 import Theme from './theme/Theme';
 
 ReactDOM.render(

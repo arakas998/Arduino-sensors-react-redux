@@ -2,9 +2,9 @@
 
 import clsx from 'clsx';
 import React from 'react';
-import { Link as RouterLink } from 'react-router-dom';
+import { Link as RouterLink, useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { signOutAction } from '../../../redux/actions/authActions';
+import { logoutAction } from '../../../redux/actions/userActions';
 
 // Material UI
 import Fab from '@material-ui/core/Fab';
@@ -25,9 +25,15 @@ import { faBars } from '@fortawesome/free-solid-svg-icons';
 import useStyles from './style.js';
 
 const Topbar = ({ open, handleDrawerOpen }) => {
+	const user = useSelector(state => state.user);
 	const dispatch = useDispatch();
+	const history = useHistory();
 	const classes = useStyles();
-	const singIn = useSelector(state => state.auth.singIn);
+
+	const logoutHandler = e => {
+		dispatch(logoutAction());
+		history.push('/login');
+	};
 
 	return (
 		<AppBar
@@ -50,9 +56,10 @@ const Topbar = ({ open, handleDrawerOpen }) => {
 				>
 					<FontAwesomeIcon icon={faBars} />
 				</IconButton>
+
 				<Container>
 					<Grid container justify='space-between'>
-						{/* Logo */}
+						{/* Application name*/}
 						<Grid item>
 							<Typography variant='h5' style={{ marginTop: 4 }} noWrap>
 								<Link
@@ -69,18 +76,18 @@ const Topbar = ({ open, handleDrawerOpen }) => {
 
 						{/* Links */}
 						<Grid item>
-							{(!singIn && (
+							{(!user.authenticated && (
 								<Button component={RouterLink} to={'/login'}>
-									Sign In
+									Log In
 								</Button>
 							)) || (
 								<>
 									<Button
-										component={RouterLink}
-										to={'/singin'}
-										onClick={() => dispatch(signOutAction())}
+										//component={RouterLink}
+										//to={'/login'}
+										onClick={logoutHandler}
 									>
-										Sign Out
+										Log Out
 									</Button>
 									<Fab size='small' className={classes.avatar}>
 										<Link
@@ -90,7 +97,7 @@ const Topbar = ({ open, handleDrawerOpen }) => {
 											color='inherit'
 											variant='inherit'
 										>
-											NN
+											{user.details.firstName[0] + user.details.lastName[0]}
 										</Link>
 									</Fab>
 								</>

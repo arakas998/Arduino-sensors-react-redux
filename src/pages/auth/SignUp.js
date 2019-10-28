@@ -1,9 +1,10 @@
 // Sign up page
 
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { Link as RouterLink } from 'react-router-dom';
-import signUpAction from '../../redux/actions/signUpAction';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link as RouterLink, useHistory } from 'react-router-dom';
+import { signupAction } from '../../redux/actions/userActions';
+import ButtonProgress from '../../components/ButtonProgress';
 
 // Material UI
 import Container from '@material-ui/core/Container';
@@ -23,29 +24,28 @@ import useStyles from './style.js';
 
 const Signup = () => {
 	const classes = useStyles();
+	const history = useHistory();
 	const dispatch = useDispatch();
-	const [user, setUser] = useState({
+	const loading = useSelector(state => state.ui.loading);
+	const errors = useSelector(state => state.ui.errors);
+	const [state, setState] = useState({
 		firstName: '',
 		lastName: '',
+		username: '',
 		email: '',
-		password: ''
+		password: '',
+		confirmPassword: ''
 	});
 
 	const handleChange = (id, value) => {
-		setUser(state => ({ ...state, [id]: value }));
+		setState(state => ({ ...state, [id]: value }));
 	};
 
 	const handleSubmit = e => {
 		e.preventDefault();
-		console.log('TCL: SignUp -> user', user);
 
-		dispatch(signUpAction(user));
-		setUser({
-			firstName: '',
-			lastName: '',
-			email: '',
-			password: ''
-		});
+		// Dispatch signup action
+		dispatch(signupAction(state, history));
 	};
 
 	return (
@@ -54,27 +54,37 @@ const Signup = () => {
 				<Avatar className={classes.avatar}>
 					<FontAwesomeIcon icon={faUserLock} />
 				</Avatar>
+
 				<Typography component='h1' variant='h5'>
 					Sign up
 				</Typography>
+
+				{/* sign up form */}
 				<form className={classes.form} noValidate onSubmit={handleSubmit}>
 					<Grid container spacing={2}>
+						{/* first name */}
 						<Grid item xs={12} sm={6}>
 							<TextField
-								autoComplete='fname'
-								name='firstName'
 								variant='outlined'
+								margin='normal'
 								required
 								fullWidth
-								id='firstName'
+								name='firstName'
 								label='First Name'
+								id='firstName'
+								autoComplete='fname'
 								autoFocus
-								value={user.firstName}
+								value={state.firstName}
 								onChange={e => handleChange(e.target.id, e.target.value)}
+								error={errors.firstName ? true : false}
+								helperText={errors.firstName}
 							/>
 						</Grid>
+
+						{/* last name */}
 						<Grid item xs={12} sm={6}>
 							<TextField
+								margin='normal'
 								variant='outlined'
 								required
 								fullWidth
@@ -82,51 +92,86 @@ const Signup = () => {
 								label='Last Name'
 								name='lastName'
 								autoComplete='lname'
-								value={user.lastName}
+								value={state.lastName}
 								onChange={e => handleChange(e.target.id, e.target.value)}
-							/>
-						</Grid>
-						<Grid item xs={12}>
-							<TextField
-								variant='outlined'
-								required
-								fullWidth
-								id='email'
-								label='Email Address'
-								name='email'
-								autoComplete='email'
-								value={user.email}
-								onChange={e => handleChange(e.target.id, e.target.value)}
-							/>
-						</Grid>
-						<Grid item xs={12}>
-							<TextField
-								variant='outlined'
-								required
-								fullWidth
-								name='password'
-								label='Password'
-								type='password'
-								id='password'
-								autoComplete='current-password'
-								value={user.password}
-								onChange={e => handleChange(e.target.id, e.target.value)}
+								error={errors.lastName ? true : false}
+								helperText={errors.lastName}
 							/>
 						</Grid>
 					</Grid>
-					<Button
-						type='submit'
+
+					{/* username */}
+					<TextField
+						margin='normal'
+						variant='outlined'
+						required
 						fullWidth
-						variant='contained'
-						color='primary'
-						className={classes.submit}
-					>
-						Sign up
-					</Button>
+						id='username'
+						name='username'
+						label='Username'
+						autoComplete='username'
+						value={state.username}
+						onChange={e => handleChange(e.target.id, e.target.value)}
+						error={errors.username ? true : false}
+						helperText={errors.username}
+					/>
+
+					{/* email address */}
+					<TextField
+						margin='normal'
+						variant='outlined'
+						required
+						fullWidth
+						id='email'
+						label='Email Address'
+						name='email'
+						autoComplete='email'
+						value={state.email}
+						onChange={e => handleChange(e.target.id, e.target.value)}
+						error={errors.email ? true : false}
+						helperText={errors.email}
+					/>
+
+					{/* password */}
+					<TextField
+						margin='normal'
+						variant='outlined'
+						required
+						fullWidth
+						name='password'
+						label='Password'
+						type='password'
+						id='password'
+						autoComplete='current-password'
+						value={state.password}
+						onChange={e => handleChange(e.target.id, e.target.value)}
+						error={errors.password ? true : false}
+						helperText={errors.password}
+					/>
+
+					{/* confirm password */}
+					<TextField
+						margin='normal'
+						variant='outlined'
+						required
+						fullWidth
+						name='confirmPassword'
+						label='Confirm Password'
+						type='confirmPassword'
+						id='confirmPassword'
+						value={state.confirmPassword}
+						onChange={e => handleChange(e.target.id, e.target.value)}
+						error={errors.confirmPassword ? true : false}
+						helperText={errors.confirmPassword}
+					/>
+
+					{/* Submit button with progress */}
+					<ButtonProgress loading={loading}>Sign up</ButtonProgress>
+
 					<Grid container justify='flex-end'>
 						<Grid item>
-							<Link component={RouterLink} to='/signin' variant='body2'>
-								Already have an account? Sign in
+							<Link component={RouterLink} to='/login' variant='body2'>
+								Already have an account? Log in
 							</Link>
 						</Grid>
 					</Grid>
