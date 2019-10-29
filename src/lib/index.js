@@ -1,3 +1,4 @@
-import postData from './postData';
+import fetchData from './fetchData';
+import checkToken from './checkToken';
 
-export { postData };
+export { fetchData, checkToken };

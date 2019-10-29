@@ -1,8 +1,8 @@
 // Post data with fetch api
 
-const postData = (url = '', token = '', data = {}, cb) => {
+const fetchData = (url = '', method = 'POST', token = '', data = null, cb) => {
 	fetch(url, {
-		method: 'POST',
+		method: method,
 		mode: 'cors',
 		cache: 'no-cache',
 		credentials: 'same-origin',
@@ -12,10 +12,10 @@ const postData = (url = '', token = '', data = {}, cb) => {
 		},
 		redirect: 'follow',
 		referrer: 'no-referrer',
-		body: JSON.stringify(data)
+		body: (data && JSON.stringify(data)) || null
 	})
 		.then(res => {
-			// console.log('TCL: postData -> res', res);
+			console.log('TCL: postData -> res', res);
 			res
 				.json()
 				.then(data => (res.ok ? cb(null, data) : cb(data, null)))
@@ -30,4 +30,4 @@ const postData = (url = '', token = '', data = {}, cb) => {
 		});
 };
 
-export default postData;
+export default fetchData;

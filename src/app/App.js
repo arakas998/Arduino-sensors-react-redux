@@ -14,7 +14,7 @@ import Navigation from '../layout/navigation/Navigation';
 // Custom styles
 import useStyles from './style.js';
 
-function App() {
+const App = () => {
 	const classes = useStyles();
 	return (
 		<div className={classes.root}>
@@ -29,6 +29,6 @@ function App() {
 			</BrowserRouter>
 		</div>
 	);
-}
+};
 
 export default App;

@@ -1,6 +1,6 @@
 // User reducer
 
-import { SET_USER, LOGIN_USER, LOGOUT_USER } from '../types';
+import { SET_AUTHENTICATED, SET_USER, LOGIN_USER, LOGOUT_USER } from '../types';
 
 // User default store state
 const initialState = {
@@ -10,6 +10,12 @@ const initialState = {
 
 const userReducer = (state = initialState, action) => {
 	switch (action.type) {
+		case SET_AUTHENTICATED:
+			return {
+				...state,
+				authenticated: true
+			};
+
 		case LOGIN_USER:
 			return {
 				...state,

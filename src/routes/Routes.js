@@ -1,6 +1,7 @@
 // Routes with transition effect
 
 import React from 'react';
+// import { Route, Redirect } from 'react-router-dom';
 import { Route } from 'react-router-dom';
 import { CSSTransition } from 'react-transition-group';
 
@@ -11,25 +12,34 @@ import Copyright from '../components/Copyright/Copyright';
 import Dashboard from '../pages/home/Home';
 import Signup from '../pages/auth/Signup';
 import Login from '../pages/auth/Login';
-import Logout from '../pages/auth/Logout';
 import Humidity from '../components/Humidity/Humidity';
 import Temperature from '../components/Temperature/Temperature';
 
 // Styles
 import useStyles from './style.js';
 
+// Routes => Compoonents
 const routes = [
-	{ path: '/', name: 'Dashboard', Component: Dashboard },
-	{ path: '/login', name: 'Login', Component: Login },
-	{ path: '/logout', name: 'Logout', Component: Logout },
-	{ path: '/signup', name: 'Signup', Component: Signup },
-	{ path: '/humidity', name: 'Humidity', Component: Humidity },
-	{ path: '/temperature', name: 'Temperature', Component: Temperature }
+	{ name: 'Dashboard', path: '/', Component: Dashboard },
+	{ name: 'Login', path: '/login', Component: Login },
+	{ name: 'Signup', path: '/signup', Component: Signup },
+	{ name: 'Humidity', path: '/humidity', Component: Humidity },
+	{ name: 'Temperature', path: '/temperature', Component: Temperature }
 ];
 
+// const Routes = ({ authenticated }) => {
 const Routes = () => {
 	const classes = useStyles();
-	return routes.map(({ path, Component }) => (
+
+	// If user is authenticated,
+	// change login and signup route to home page
+	// const serRedirect = name => {
+	// 	if (authenticated && (name == 'Login' || 'Signup')) return true;
+	// 	return false;
+	// };
+
+	// create routes from array
+	return routes.map(({ path, name, Component }) => (
 		<Route key={path} exact path={path}>
 			{({ match }) => (
 				<CSSTransition
@@ -44,6 +54,7 @@ const Routes = () => {
 					}}
 				>
 					<div className={classes.page}>
+						{/* {(serRedirect(name) && <Redirect to='/' />) || <Component />} */}
 						<Component />
 						<Copyright />
 					</div>

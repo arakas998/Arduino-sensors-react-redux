@@ -1,6 +1,8 @@
 // Home page
 
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 
 // Material UI
 // import Container from '@material-ui/core/Container';
@@ -18,8 +20,14 @@ const useStyles = makeStyles(theme => ({
 	}
 }));
 
-export default function Home() {
+const Home = () => {
 	const classes = useStyles();
+	const history = useHistory();
+	const authenticated = useSelector(state => state.user.authenticated);
+
+	useEffect(() => {
+		if (!authenticated) history.push('/login');
+	}, [authenticated]);
 
 	return (
 		<Grid container spacing={3} justify={'center'}>
@@ -86,4 +94,6 @@ export default function Home() {
 			</Grid>
 		</Grid>
 	);
-}
+};
+
+export default Home;

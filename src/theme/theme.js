@@ -4,7 +4,7 @@ import React from 'react';
 import { ThemeProvider } from '@material-ui/core/styles';
 import { createMuiTheme } from '@material-ui/core/styles';
 
-export default function Theme({ dark, children }) {
+const Theme = ({ dark, children }) => {
 	const theme = createMuiTheme({
 		// palette: {
 		// 	primary: {
@@ -22,6 +22,7 @@ export default function Theme({ dark, children }) {
 		// },
 		palette: {
 			type: `${dark ? 'dark' : 'light'}`
+			//type: 'dark'
 		},
 		overrides: {
 			MuiButton: {
@@ -34,4 +35,6 @@ export default function Theme({ dark, children }) {
 
 	// theme.palette.type = `${false ? 'dark' : 'light'}`;
 	return <ThemeProvider theme={theme}>{children}</ThemeProvider>;
-}
+};
+
+export default Theme;

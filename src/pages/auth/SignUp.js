@@ -157,13 +157,18 @@ const Signup = () => {
 						fullWidth
 						name='confirmPassword'
 						label='Confirm Password'
-						type='confirmPassword'
+						type='password'
 						id='confirmPassword'
 						value={state.confirmPassword}
 						onChange={e => handleChange(e.target.id, e.target.value)}
 						error={errors.confirmPassword ? true : false}
 						helperText={errors.confirmPassword}
 					/>
+
+					{/* error message */}
+					<Typography variant='h6' align='center' color='secondary'>
+						{errors.error}
+					</Typography>
 
 					{/* Submit button with progress */}
 					<ButtonProgress loading={loading}>Sign up</ButtonProgress>
